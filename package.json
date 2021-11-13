@@ -10,7 +10,9 @@
     "less": "^4.1.2",
     "vue": "^3.0.5",
     "vue-router": "^4.0.11",
-    "vuex": "^4.0.2"
+    "vuex": "^4.0.2",
+    "vxe-table": "^4.1.6",
+    "xe-utils": "^3.4.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.2.3",
