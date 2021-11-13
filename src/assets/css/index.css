@@ -15,4 +15,8 @@ body {
   height: 100%;
   border: hidden;
 }
+@font-face {
+  font-family: "Franklin";/*定义字体名*/
+  src: url(/@/assets/front/TheFrankline.ttf);/*字体包的引入路径*/
+}
 

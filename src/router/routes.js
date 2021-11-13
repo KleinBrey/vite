@@ -9,7 +9,7 @@ const buttoneffect = () => import('/@/page/vueFunction/buttoneffect/index.vue');
 
 
 const routes = [
-  { path: '/', redirect: '/jswork' },
+  { path: '/', redirect: '/login' },
   {
     path: '/login',
     name: 'login',
