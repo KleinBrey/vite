@@ -5,9 +5,11 @@ import App from './App.vue'
 // import Vuex from 'vuex'
 import router from './router'
 import store from './store';
-import { useElementPlus } from "../src/plugins/element-plus/index";
+import  useElementPlus from "../src/plugins/element-plus/index";
+import  useTable from "../src/plugins/vxe-table/index";
+
 import './assets/css/index.css'
 
 const app = createApp(App)
-app.use(useElementPlus).use(store).use(router)
+app.use(useElementPlus).use(useTable).use(store).use(router)
 app.mount('#app')

@@ -1,14 +1,20 @@
 // src/router/routes.js
 const home = () => import('../page/home.vue');
+const login = () => import('../page/login/index.vue');
 const promise = () => import('../page/promise.vue');
 const jswork = () => import('../page/36jswork.vue');
-const Page404 = () => import('@/components/Page404.vue');
-const vueFunction = () => import('@/page/vueFunction/index.vue');
-const buttoneffect = () => import('@/page/vueFunction/buttoneffect/index.vue');
+const Page404 = () => import('/@/components/Page404.vue');
+const vueFunction = () => import('/@/page/vueFunction/index.vue');
+const buttoneffect = () => import('/@/page/vueFunction/buttoneffect/index.vue');
 
 
 const routes = [
-  { path: '/', redirect: '/jswork' },
+  { path: '/', redirect: '/login' },
+  {
+    path: '/login',
+    name: 'login',
+    component: login,
+  },
   {
     path: '/home',
     name: 'home',

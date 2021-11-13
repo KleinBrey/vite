@@ -1,17 +1,22 @@
-i.el-select__caret {
-  /*很关键：将默认的select选择框样式清除*/  
- appearance:none;
- -moz-appearance:none;
- -webkit-appearance:none;
- /*为下拉小箭头留出一点位置，避免被文字覆盖*/  
- padding-right: 14px;
- /*自定义图片*/  
- background: url("../logo.png") no-repeat scroll right center transparent;
- /*自定义图片的大小*/  
- background-size: 18px 12px;
+html,
+body {
+  height: 100%;
+  width: 100%;
+  border: hidden;
+  overflow: hidden;
 }
-/*将小箭头的样式去去掉*/  
-.el-icon-arrow-up:before {
- content: '';
+#app {
+  padding: 0px;
+  margin: 0px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  border: hidden;
+}
+@font-face {
+  font-family: "Franklin";/*定义字体名*/
+  src: url(/@/assets/front/TheFrankline.ttf);/*字体包的引入路径*/
 }
 

@@ -1,14 +1,20 @@
 <template>
   <div class="allbutton">
-    <button class="btn button1"><span class="mask mask-1"></span></button>
-    <button class="btn button2"><span class="mask mask-2"></span></button>
-    <button class="btn button3"><span class="mask mask-3"></span></button>
-    <button class="btn button4"><span class="mask mask-4"></span></button>
-
+    <button class="btn button1">
+      <span class="mask mask-1"></span>
+    </button>
+    <button class="btn button2">
+      <span class="mask mask-2"></span>
+    </button>
+    <button class="btn button3">
+      <span class="mask mask-3"></span>
+    </button>
+    <button class="btn button4">
+      <span class="mask mask-4"></span>
+    </button>
   </div>
 </template>
 <script setup>
-
 </script>
 <style lang="less" scoped>
 // animation 动画
@@ -93,11 +99,11 @@ button {
     background: black;
   }
   .button3 .mask {
-    animation: scdme2 1s infinite ;
+    animation: scdme2 1s infinite;
   }
-  .button4{
+  .button4 {
     background: blueviolet;
-    transform: 0.5s all
+    transform: 0.5s all;
   }
 }
 </style>

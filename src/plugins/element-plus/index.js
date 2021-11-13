@@ -1,4 +1,3 @@
-
 import {
   ElAlert,
   ElAside,
@@ -82,10 +81,10 @@ import {
   ElLoading,
   ElMessage,
   ElMessageBox,
-  ElNotification,
+  ElNotification
 } from "element-plus";
-import 'element-plus/lib/theme-chalk/index.css';
-const components = [
+import "element-plus/lib/theme-chalk/index.css";
+const componentlist = [
   ElAlert,
   ElAside,
   ElAutocomplete,
@@ -168,19 +167,40 @@ const components = [
   ElLoading,
   ElMessage,
   ElMessageBox,
-  ElNotification,
+  ElNotification
 ];
-
 const plugins = [ElLoading];
+// 中文支持
+// import ElementLocale from "element-plus/lib/locale";
+// import zhLocale from "element-plus/lib/locale/lang/zh-cn";
+// ElementLocale.use(zhLocale);
 
-import ElementLocale from "element-plus/lib/locale";
-import zhLocale from "element-plus/lib/locale/lang/zh-cn";
-ElementLocale.use(zhLocale);
-export function useElementPlus (app) {
-  components.forEach((component) => {
-    app.component(component.name, component);
-  });
-  plugins.forEach((plugin) => {
-    app.use(plugin);
-  });
-}
+// export function useElementPlus (app) {
+//   componentlist.forEach((component) => {
+//     app.component(component.name, component);
+//   });
+//   plugins.forEach((plugin) => {
+//     app.use(plugin);
+//   });
+// }
+// 不需要install 方法
+// const useElementPlus = app => {
+//   componentlist.forEach(component => {
+//     app.component(component.name, component);
+//   });
+//   plugins.forEach(plugin => {
+//     app.use(plugin);
+//   });
+// };
+// install() 方法
+const useElementPlus = {
+  install(app) {
+    componentlist.forEach(component => {
+      app.component(component.name, component);
+    });
+    plugins.forEach(plugin => {
+      app.use(plugin);
+    });
+  }
+};
+export default useElementPlus;

@@ -1,7 +1,4 @@
 <template>
-  <img alt="Vue logo"
-       src="./assets/logo.png" />
-  <!-- <HelloWorld :msg="rgrg" @myclick="add" /> -->
   <router-view  />
 </template>
 
