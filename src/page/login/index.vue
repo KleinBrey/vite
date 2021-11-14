@@ -45,6 +45,8 @@
 </template>
 <script setup>
 import { reactive, toRefs, onMounted, onUnmounted } from "vue";
+import { userToken } from "/@/api/login";
+import storage from "/@/utils/storage";
 const form = reactive({
   model: {
     userName: "",
@@ -62,8 +64,13 @@ const form = reactive({
     ]
   }
 });
-const handleLogin = () => {
-  alert("444");
+const handleLogin = async () => {
+  const { data } = await userToken();
+  storage.setValue("key", data.token);
+  console.log(storage.getValue("key"))
+};
+const resetForm = () => {
+  storage.removeValue("key");
 };
 // 回车
 const handleEnterKey = e => {
