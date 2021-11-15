@@ -35,10 +35,10 @@
 </template>
 <script setup>
 import { ref, reactive, toRefs, onMounted, onUnmounted } from "vue";
-import { userToken } from "/@/api/login";
 import storage from "/@/utils/storage";
 import cookie from "/@/utils/cookie";
-
+import { useStore } from "vuex";
+const store = useStore();
 const ruleForm = ref(null);
 const form = reactive({
   model: {
@@ -56,8 +56,7 @@ const form = reactive({
 const handleLogin = () => {
   ruleForm.value.validate(async valid => {
     if (valid) {
-      const { data } = await userToken();
-      storage.setValue("ACCESS_TOKEN", data.token);
+      store.dispatch("setToken").then(res => console.log(res));
       cookie.setCookie(form.model.userName, form.model.passWord, 5);
     }
   });
