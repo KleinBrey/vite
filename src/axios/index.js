@@ -40,8 +40,10 @@ function myAxios(axiosConfig, customOptions, loadingOptions) {
         }
       }
       // 自动携带token
-      if (storage.getValue("key") && typeof window !== "undefined") {
-        config.headers.Authorization = storage.getValue("key");
+      if (config.url === "login") {
+        return config;
+      } else {
+        config.headers.Authorization = storage.getValue("ACCESS_TOKEN") || "";
       }
       return config;
     },
@@ -55,7 +57,6 @@ function myAxios(axiosConfig, customOptions, loadingOptions) {
     response => {
       removePending(response.config);
       custom_options.loading && closeLoading(custom_options); // 关闭loading
-
       if (
         custom_options.code_message_show &&
         response.data &&
@@ -67,7 +68,10 @@ function myAxios(axiosConfig, customOptions, loadingOptions) {
         });
         return Promise.reject(response.data); // code不等于0, 页面具体逻辑就不执行了
       }
-
+      ElMessage({
+        type: "success",
+        message: `${response.config.url}接口调用成功！`
+      });
       return custom_options.reduct_data_format ? response.data : response;
     },
     error => {
@@ -178,6 +182,25 @@ function closeLoading(_options) {
  * @param {*} config
  */
 function addPending(config) {
+  /**
+   * config包含的内容
+   */
+  // adapter: ƒ xhrAdapter(config)
+  // baseURL: "/api"
+  // cancelToken: CancelToken {promise: Promise, _listeners: null, reason: Cancel}
+  // data: undefined
+  // headers: {Accept: 'application/json, text/plain, */*', Authorization: '34455tshjjd6dyajdis'}
+  // maxBodyLength: -1
+  // maxContentLength: -1
+  // method: "get"
+  // timeout: 10000
+  // transformRequest: [ƒ]
+  // transformResponse: [ƒ]
+  // transitional: {silentJSONParsing: true, forcedJSONParsing: true, clarifyTimeoutError: false}
+  // url: "login"
+  // validateStatus: ƒ validateStatus(status)
+  // xsrfCookieName: "XSRF-TOKEN"
+  // xsrfHeaderName: "X-XSRF-TOKEN"
   const pendingKey = getPendingKey(config);
   config.cancelToken =
     config.cancelToken ||
@@ -209,6 +232,7 @@ function removePending(config) {
  * @returns
  */
 function getPendingKey(config) {
+  // console.log(config)
   let { url, method, params, data } = config;
   if (typeof data === "string") data = JSON.parse(data); // response里面返回的config.data是个字符串对象
   return [url, method, JSON.stringify(params), JSON.stringify(data)].join("&");
