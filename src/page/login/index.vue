@@ -23,19 +23,9 @@
             prefix-icon="el-icon-lock"
           ></el-input>
         </el-form-item>
-        <el-form-item prop="verify">
-          <el-input
-            maxlength="2"
-            onkeyup="this.value=this.value.replace(/[^\d.]/g,'');"
-            v-model.number="model.verify"
-            placeholder="请输入验证码"
-          ></el-input>
-          <span class="verify" title="刷新" v-html="model.svg" @click.prevent="refreshVerify"></span>
-        </el-form-item>
         <el-form-item>
           <el-button type="primary" @click.prevent="handleLogin">登录</el-button>
-          <el-button @click="resetForm">重置</el-button>
-          <span class="tips" @click="changPage">注册</span>
+          <el-button @click="resetForm">注册</el-button>
         </el-form-item>
         <span title="测试用户 直接登录" class="secret" @click="noSecret">免密登录</span>
         <span class="tag">THRASHER</span>
@@ -44,7 +34,12 @@
   </div>
 </template>
 <script setup>
-import { reactive, toRefs, onMounted, onUnmounted } from "vue";
+import { ref, reactive, toRefs, onMounted, onUnmounted } from "vue";
+import { userToken } from "/@/api/login";
+import storage from "/@/utils/storage";
+import cookie from "/@/utils/cookie";
+
+const ruleForm = ref(null);
 const form = reactive({
   model: {
     userName: "",
@@ -54,26 +49,32 @@ const form = reactive({
     userName: [{ required: true, message: "请输入用户名", trigger: "blur" }],
     passWord: [
       { required: true, message: "请输入密码", trigger: "blur" },
-      { min: 6, message: "密码长度必须不小于6位", trigger: "blur" }
-    ],
-    verify: [
-      { required: true, message: "请输入验证码", trigger: "blur" },
-      { type: "number", message: "验证码必须是数字类型", trigger: "blur" }
+      { min: 2, message: "密码长度必须不小于2位", trigger: "blur" }
     ]
   }
 });
 const handleLogin = () => {
-  alert("444");
+  ruleForm.value.validate(async valid => {
+    if (valid) {
+      const { data } = await userToken();
+      storage.setValue("ACCESS_TOKEN", data.token);
+      cookie.setCookie(form.model.userName, form.model.passWord, 5);
+    }
+  });
 };
-// 回车
+const resetForm = () => {
+  storage.removeValue("ACCESS_TOKEN");
+};
+// 回车登录
 const handleEnterKey = e => {
   if (e.keyCode === 13) {
-    //登录方法
     handleLogin();
   }
 };
 onMounted(() => {
   document.addEventListener("keydown", handleEnterKey);
+  form.model.userName = cookie.getCookie().userName;
+  form.model.passWord = cookie.getCookie().passWord;
 });
 onUnmounted(() => {
   document.removeEventListener("keydown", handleEnterKey);
@@ -90,7 +91,7 @@ const { model, rules } = toRefs(form);
   background-size: cover;
   .logincontent {
     width: 300px;
-    height: 400px;
+    height: 350px;
     background-color: rgba(255, 255, 255, 0.3);
     border-radius: 20px;
     position: absolute;
@@ -119,6 +120,7 @@ const { model, rules } = toRefs(form);
       }
       .secret {
         margin-top: 25px;
+        font-size: 20px;
         display: inline-block;
         cursor: pointer;
       }
