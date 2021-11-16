@@ -50,5 +50,8 @@ export default defineConfig({
   // 引入第三方的配置
   optimizeDeps: {
     include: ["element-plus"]
+  },
+  define: {
+    'process.env': {}
   }
 });

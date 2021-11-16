@@ -3,7 +3,6 @@ import { ElLoading, ElMessage } from "element-plus";
 import storage from "/@/utils/storage";
 
 const pendingMap = new Map();
-
 const LoadingInstance = {
   _target: null,
   _count: 0

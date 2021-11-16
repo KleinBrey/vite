@@ -9,6 +9,7 @@ import  useElementPlus from "../src/plugins/element-plus/index";
 import  useTable from "../src/plugins/vxe-table/index";
 
 import './assets/css/index.css'
+console.log(import.meta.env)
 
 const app = createApp(App)
 app.use(useElementPlus).use(useTable).use(store).use(router)
