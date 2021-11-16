@@ -56,7 +56,10 @@ const form = reactive({
 const handleLogin = () => {
   ruleForm.value.validate(async valid => {
     if (valid) {
-      store.dispatch("setToken").then(res => console.log(res));
+      store
+        .dispatch("setToken")
+        .then(res => console.log(res))
+        .catch(res => console.log(res));
       cookie.setCookie(form.model.userName, form.model.passWord, 5);
     }
   });
