@@ -38,7 +38,10 @@ import { ref, reactive, toRefs, onMounted, onUnmounted } from "vue";
 import storage from "/@/utils/storage";
 import cookie from "/@/utils/cookie";
 import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+
 const store = useStore();
+const router = useRouter();
 const ruleForm = ref(null);
 const form = reactive({
   model: {
@@ -58,7 +61,11 @@ const handleLogin = () => {
     if (valid) {
       store
         .dispatch("setToken")
-        .then(res => console.log(res))
+        .then(res => {
+          if (res) {
+            router.push({ path: "/dashboard" });
+          }
+        })
         .catch(res => console.log(res));
       cookie.setCookie(form.model.userName, form.model.passWord, 5);
     }
