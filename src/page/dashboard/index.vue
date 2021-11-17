@@ -1,137 +1,123 @@
 <template>
-  <el-row class="tac">
-   
-      <el-icon>
-        <Aim />
-      </el-icon>
-      <span>账户管理</span>
-    <el-col :span="12">
-      <h5>Default colors</h5>
-      <el-menu
-        default-active="2"
-        class="el-menu-vertical-demo"
-        @open="handleOpen"
-        @close="handleClose"
-      >
+  <el-container style="height: 500px; border: 1px solid #eee">
+    <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+      <el-menu :default-openeds="['1', '3']">
         <el-sub-menu index="1">
           <template #title>
-            <Location />
-            <span>Navigator One</span>
+            <el-icon><message /></el-icon>Navigator One
           </template>
-          <el-menu-item-group title="Group One">
-            <el-menu-item index="1-1">item one</el-menu-item>
-            <el-menu-item index="1-2">item one</el-menu-item>
+          <el-menu-item-group>
+            <template #title>Group 1</template>
+            <el-menu-item index="1-1">Option 1</el-menu-item>
+            <el-menu-item index="1-2">Option 2</el-menu-item>
           </el-menu-item-group>
-          <el-menu-item-group title="Group Two">
-            <el-menu-item index="1-3">item three</el-menu-item>
+          <el-menu-item-group title="Group 2">
+            <el-menu-item index="1-3">Option 3</el-menu-item>
           </el-menu-item-group>
           <el-sub-menu index="1-4">
-            <template #title>item four</template>
-            <el-menu-item index="1-4-1">item one</el-menu-item>
+            <template #title>Option4</template>
+            <el-menu-item index="1-4-1">Option 4-1</el-menu-item>
           </el-sub-menu>
         </el-sub-menu>
-        <el-menu-item index="2">
-          <el-icon>
-            <icon-menu />
-          </el-icon>
-          <span>Navigator Two</span>
-        </el-menu-item>
-        <el-menu-item index="3" disabled>
-          <el-icon>
-            <document />
-          </el-icon>
-          <span>Navigator Three</span>
-        </el-menu-item>
-        <el-menu-item index="4">
-          <el-icon>
-            <setting />
-          </el-icon>
-          <span>Navigator Four</span>
-        </el-menu-item>
-      </el-menu>
-    </el-col>
-    <el-col :span="12">
-      <h5>Custom colors</h5>
-      <el-menu
-        active-text-color="#ffd04b"
-        background-color="#545c64"
-        class="el-menu-vertical-demo"
-        default-active="2"
-        text-color="#fff"
-        @open="handleOpen"
-        @close="handleClose"
-      >
-        <el-sub-menu index="1">
+        <el-sub-menu index="2">
           <template #title>
-            <el-icon>
-              <location />
-            </el-icon>
-            <span>Navigator One</span>
+            <el-icon><icon-menu /></el-icon>Navigator Two
           </template>
-          <el-menu-item-group title="Group One">
-            <el-menu-item index="1-1">item one</el-menu-item>
-            <el-menu-item index="1-2">item one</el-menu-item>
+          <el-menu-item-group>
+            <template #title>Group 1</template>
+            <el-menu-item index="2-1">Option 1</el-menu-item>
+            <el-menu-item index="2-2">Option 2</el-menu-item>
           </el-menu-item-group>
-          <el-menu-item-group title="Group Two">
-            <el-menu-item index="1-3">item three</el-menu-item>
+          <el-menu-item-group title="Group 2">
+            <el-menu-item index="2-3">Option 3</el-menu-item>
           </el-menu-item-group>
-          <el-sub-menu index="1-4">
-            <template #title>item four</template>
-            <el-menu-item index="1-4-1">item one</el-menu-item>
+          <el-sub-menu index="2-4">
+            <template #title>Option 4</template>
+            <el-menu-item index="2-4-1">Option 4-1</el-menu-item>
           </el-sub-menu>
         </el-sub-menu>
-        <el-menu-item index="2">
-          <el-icon>
-            <icon-menu />
-          </el-icon>
-          <span>Navigator Two</span>
-        </el-menu-item>
-        <el-menu-item index="3" disabled>
-          <el-icon>
-            <Document />
-          </el-icon>
-          <span>Navigator Three</span>
-        </el-menu-item>
-        <el-menu-item index="4">
-          <el-icon>
-            <setting />
-          </el-icon>
-          <span>Navigator Four</span>
-        </el-menu-item>
+        <el-sub-menu index="3">
+          <template #title>
+            <el-icon><setting /></el-icon>Navigator Three
+          </template>
+          <el-menu-item-group>
+            <template #title>Group 1</template>
+            <el-menu-item index="3-1">Option 1</el-menu-item>
+            <el-menu-item index="3-2">Option 2</el-menu-item>
+          </el-menu-item-group>
+          <el-menu-item-group title="Group 2">
+            <el-menu-item index="3-3">Option 3</el-menu-item>
+          </el-menu-item-group>
+          <el-sub-menu index="3-4">
+            <template #title>Option 4</template>
+            <el-menu-item index="3-4-1">Option 4-1</el-menu-item>
+          </el-sub-menu>
+        </el-sub-menu>
       </el-menu>
-    </el-col>
-  </el-row>
+    </el-aside>
+
+    <el-container>
+      <el-header style="text-align: right; font-size: 12px">
+        <el-dropdown>
+          <el-icon style="margin-right: 15px"><setting /></el-icon>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item>View</el-dropdown-item>
+              <el-dropdown-item>Add</el-dropdown-item>
+              <el-dropdown-item>Delete</el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+        <span>Tom</span>
+      </el-header>
+
+      <el-main>
+        <el-table :data="tableData">
+          <el-table-column prop="date" label="Date" width="140">
+          </el-table-column>
+          <el-table-column prop="name" label="Name" width="120">
+          </el-table-column>
+          <el-table-column prop="address" label="Address"> </el-table-column>
+        </el-table>
+      </el-main>
+    </el-container>
+  </el-container>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-import { Aim } from "@element-plus/icons";
-import {
-  Location,
-  Document,
-  Menu as IconMenu,
-  Setting
-} from "@element-plus/icons";
-console.log(Document);
+import { defineComponent, ref } from 'vue'
+import { Message, Menu, Setting } from '@element-plus/icons'
+
 export default defineComponent({
   components: {
-    Location,
-    Document,
+    Message,
     Setting,
-    IconMenu,
-    Aim
+    'icon-menu': Menu,
   },
   setup() {
-    const handleOpen = (key, keyPath) => {
-      console.log(key, keyPath);
-    };
-    const handleClose = (key, keyPath) => {
-      console.log(key, keyPath);
-    };
+    const item = {
+      date: '2016-05-02',
+      name: 'Tom',
+      address: 'No. 189, Grove St, Los Angeles',
+    }
+
+    const tableData = ref(Array(20).fill(item))
+
     return {
-      handleOpen,
-      handleClose
-    };
-  }
-});
+      tableData,
+    }
+  },
+})
 </script>
+
+<style>
+.el-header {
+  background-color: #b3c0d1;
+  color: var(--el-text-color-primary);
+  line-height: 60px;
+}
+
+.el-aside {
+  color: var(--el-text-color-primary);
+}
+</style>
