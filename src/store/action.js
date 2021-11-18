@@ -1,8 +1,7 @@
 import state from "./state";
-import { userToken } from "/@/api/login";
+import { userToken, getMenulist } from "/@/api/login";
 import * as types from "./mutation-types";
 import { ElMessage } from "element-plus";
-import storage from "/@/utils/storage";
 
 const actions = {
   changename(context, val) {
@@ -23,8 +22,12 @@ const actions = {
         .then(res => {
           if (res.code === 0) {
             resolve(res);
-            storage.setValue('ACCESS_TOKEN',res.data.token)
+           
             commit(types.ACCESS_TOKEN, res.data.token);
+            getMenulist().then(res => {
+              console.log(res);
+              commit(types.MENU_LIST, res.data);
+            });
           } else {
             ElMessage({
               type: "error",
