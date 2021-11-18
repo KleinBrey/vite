@@ -19,32 +19,34 @@ const routes = [
   {
     path: "/dashboard",
     name: "dashboard",
-    component: dashboard
-  },
-  {
-    path: "/home",
-    name: "home",
-    component: home
-  },
-  {
-    path: "/promise",
-    name: "promise",
-    component: promise
-  },
-  {
-    path: "/jswork",
-    name: "jswork",
-    component: jswork
-  },
-  {
-    path: "/vueFunction",
-    name: "vueFunction",
-    component: vueFunction
-  },
-  {
-    path: "/vueFunction/buttoneffect",
-    name: "buttoneffect",
-    component: buttoneffect
+    component: dashboard,
+    children:[
+      {
+        path: "/home",
+        name: "home",
+        component: home
+      },
+      {
+        path: "/promise",
+        name: "promise",
+        component: promise
+      },
+      {
+        path: "/jswork",
+        name: "jswork",
+        component: jswork
+      },
+      {
+        path: "/vueFunction",
+        name: "vueFunction",
+        component: vueFunction
+      },
+      {
+        path: "/vueFunction/buttoneffect",
+        name: "buttoneffect",
+        component: buttoneffect
+      },
+    ]
   },
   {
     path: "/:catchAll(.*)",
