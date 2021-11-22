@@ -62,7 +62,6 @@ import {
   ElSlider,
   ElStep,
   ElSteps,
-  ElSubmenu,
   ElSwitch,
   ElTabPane,
   ElTable,
@@ -81,9 +80,8 @@ import {
   ElLoading,
   ElMessage,
   ElMessageBox,
-  ElNotification
+  ElNotification,
 } from "element-plus";
-import "element-plus/lib/theme-chalk/index.css";
 const componentlist = [
   ElAlert,
   ElAside,
@@ -148,7 +146,6 @@ const componentlist = [
   ElSlider,
   ElStep,
   ElSteps,
-  ElSubmenu,
   ElSwitch,
   ElTabPane,
   ElTable,
@@ -167,7 +164,7 @@ const componentlist = [
   ElLoading,
   ElMessage,
   ElMessageBox,
-  ElNotification
+  ElNotification,
 ];
 const plugins = [ElLoading];
 // 中文支持

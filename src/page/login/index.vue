@@ -6,12 +6,13 @@
     <div class="logincontent">
       <el-form :model="model" :rules="rules" ref="ruleForm" class="rule-form">
         <el-form-item prop="userName">
-          <el-input
-            clearable
-            v-model="model.userName"
-            placeholder="请输入用户名"
-            prefix-icon="el-icon-user"
-          ></el-input>
+          <el-input clearable v-model="model.userName" placeholder="请输入用户名">
+            <template #prefix>
+              <el-icon class="el-input__icon">
+                <user />
+              </el-icon>
+            </template>
+          </el-input>
         </el-form-item>
         <el-form-item prop="passWord">
           <el-input
@@ -20,8 +21,13 @@
             show-password
             v-model="model.passWord"
             placeholder="请输入密码"
-            prefix-icon="el-icon-lock"
-          ></el-input>
+          >
+            <template #prefix>
+              <el-icon class="el-input__icon">
+                <lock />
+              </el-icon>
+            </template>
+          </el-input>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click.prevent="handleLogin">登录</el-button>
@@ -35,10 +41,13 @@
 </template>
 <script setup>
 import { ref, reactive, toRefs, onMounted, onUnmounted } from "vue";
-import { userToken } from "/@/api/login";
 import storage from "/@/utils/storage";
 import cookie from "/@/utils/cookie";
-
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+import { User, Lock } from "@element-plus/icons";
+const store = useStore();
+const router = useRouter();
 const ruleForm = ref(null);
 const form = reactive({
   model: {
@@ -56,8 +65,14 @@ const form = reactive({
 const handleLogin = () => {
   ruleForm.value.validate(async valid => {
     if (valid) {
-      const { data } = await userToken();
-      storage.setValue("ACCESS_TOKEN", data.token);
+      store
+        .dispatch("setToken")
+        .then(res => {
+          if (res) {
+            router.push({ path: "/dashboard" });
+          }
+        })
+        .catch(res => console.log(res));
       cookie.setCookie(form.model.userName, form.model.passWord, 5);
     }
   });

@@ -2,10 +2,11 @@ import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import path from "path";
 import styleImport from "vite-plugin-style-import";
-// https://vitejs.dev/config/
+
 export default defineConfig({
   plugins: [
     vue(),
+   
     styleImport({
       libs: [
         {
@@ -50,5 +51,5 @@ export default defineConfig({
   // 引入第三方的配置
   optimizeDeps: {
     include: ["element-plus"]
-  }
+  },
 });
