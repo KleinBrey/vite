@@ -6,4 +6,6 @@ export const userToken = params => {
 export const getMenulist = params => {
   return request("get", `menu`, params, false);
 };
-
+export const logOut = params => {
+  return request("post", `logout`, params, false);
+};

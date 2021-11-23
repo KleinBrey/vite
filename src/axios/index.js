@@ -84,19 +84,35 @@ function myAxios(axiosConfig, customOptions, loadingOptions) {
 }
 // 请求方式
 export default function request(method, url, data, lodding = true) {
-  return myAxios(
-    {
-      url: url,
-      method: method,
-      params: data
-    },
-    {
-      loading: lodding
-    },
-    {
-      text: "获取列表数据...."
-    }
-  );
+  if (method === "get") {
+    return myAxios(
+      {
+        url: url,
+        method: method,
+        params: data
+      },
+      {
+        loading: lodding
+      },
+      {
+        text: "获取列表数据...."
+      }
+    );
+  } else {
+    return myAxios(
+      {
+        url: url,
+        method: method,
+        data
+      },
+      {
+        loading: lodding
+      },
+      {
+        text: "获取列表数据...."
+      }
+    );
+  }
 }
 
 /**

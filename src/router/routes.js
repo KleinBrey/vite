@@ -2,7 +2,6 @@
 const home = () => import("../page/home.vue");
 const login = () => import("../page/login/index.vue");
 const dashboard = () => import("../page/dashboard/index.vue");
-
 const promise = () => import("../page/promise.vue");
 const jswork = () => import("../page/36jswork.vue");
 const Page404 = () => import("/@/components/Page404.vue");
@@ -20,7 +19,7 @@ const routes = [
     path: "/dashboard",
     name: "dashboard",
     component: dashboard,
-    children:[
+    children: [
       {
         path: "/home",
         name: "home",
@@ -39,13 +38,15 @@ const routes = [
       {
         path: "/vueFunction",
         name: "vueFunction",
-        component: vueFunction
-      },
-      {
-        path: "/vueFunction/buttoneffect",
-        name: "buttoneffect",
-        component: buttoneffect
-      },
+        component: vueFunction,
+        children: [
+          {
+            path: "/vueFunction/buttoneffect",
+            name: "buttoneffect",
+            component: buttoneffect
+          }
+        ]
+      }
     ]
   },
   {

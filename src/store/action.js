@@ -22,10 +22,8 @@ const actions = {
         .then(res => {
           if (res.code === 0) {
             resolve(res);
-           
             commit(types.ACCESS_TOKEN, res.data.token);
             getMenulist().then(res => {
-              console.log(res);
               commit(types.MENU_LIST, res.data);
             });
           } else {
