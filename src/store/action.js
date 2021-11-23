@@ -24,7 +24,6 @@ const actions = {
             resolve(res);
             commit(types.ACCESS_TOKEN, res.data.token);
             getMenulist().then(res => {
-              console.log(res);
               commit(types.MENU_LIST, res.data);
             });
           } else {
