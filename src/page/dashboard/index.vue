@@ -14,25 +14,24 @@
           </el-icon>
           <template #dropdown>
             <el-dropdown-menu>
-              <el-dropdown-item>View</el-dropdown-item>
-              <el-dropdown-item>Add</el-dropdown-item>
-              <el-dropdown-item>Delete</el-dropdown-item>
+              <el-dropdown-item @click="logout">退出登录</el-dropdown-item>
+              <el-dropdown-item>修改密码</el-dropdown-item>
             </el-dropdown-menu>
           </template>
         </el-dropdown>
-        <span>Tom</span>
+        <span>管理员</span>
       </el-header>
-
       <el-main>
         <router-view></router-view>
       </el-main>
-      <el-footer>Footer</el-footer>
+      <el-footer>底部</el-footer>
     </el-container>
   </el-container>
 </template>
 
 <script setup>
 import { ref, computed } from "vue";
+import { logOut } from "/@/api/login";
 import Submenu from "../../components/Submenu.vue";
 import { Message, Menu, Setting } from "@element-plus/icons";
 import { useStore } from "vuex";
@@ -42,7 +41,13 @@ const routers = useRouter();
 const menulist = computed(() => store.state.menulist);
 
 const menuSelect = e => {
-  routers.push({ path: e });
+  routers.push(e);
+};
+const logout = () => {
+  logOut({ fhfhfh: 1 }).then(res => {
+    routers.push("/login");
+    window.sessionStorage.clear();
+  });
 };
 </script>
 

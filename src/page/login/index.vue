@@ -66,7 +66,7 @@ const handleLogin = () => {
   ruleForm.value.validate(async valid => {
     if (valid) {
       store
-        .dispatch("setToken")
+        .dispatch("setToken",{id:1})
         .then(res => {
           if (res) {
             router.push({ path: "/dashboard" });
