@@ -36,6 +36,8 @@ import Submenu from "../../components/Submenu.vue";
 import { Message, Menu, Setting } from "@element-plus/icons";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
+import * as types from "../../store/mutation-types";
+
 const store = useStore();
 const routers = useRouter();
 const menulist = computed(() => store.state.menulist);
@@ -47,6 +49,7 @@ const logout = () => {
   logOut({ fhfhfh: 1 }).then(res => {
     routers.push("/login");
     window.sessionStorage.clear();
+    store.commit(types.MENU_LIST, [])
   });
 };
 </script>
