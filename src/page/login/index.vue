@@ -66,7 +66,7 @@ const handleLogin = () => {
   ruleForm.value.validate(async valid => {
     if (valid) {
       store
-        .dispatch("setToken",{id:1})
+        .dispatch("setToken", { id: 1 })
         .then(res => {
           if (res) {
             router.push({ path: "/dashboard" });
@@ -88,8 +88,8 @@ const handleEnterKey = e => {
 };
 onMounted(() => {
   document.addEventListener("keydown", handleEnterKey);
-  form.model.userName = cookie.getCookie().userName;
-  form.model.passWord = cookie.getCookie().passWord;
+  form.model.userName = cookie.getCookie()?.userName;
+  form.model.passWord = cookie.getCookie()?.passWord;
 });
 onUnmounted(() => {
   document.removeEventListener("keydown", handleEnterKey);
