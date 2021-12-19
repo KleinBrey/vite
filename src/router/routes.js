@@ -1,4 +1,6 @@
 // src/router/routes.js
+const firsthome = () => import("../page/home/index.vue");
+
 const home = () => import("../page/home.vue");
 const login = () => import("../page/login/index.vue");
 const dashboard = () => import("../page/dashboard/index.vue");
@@ -20,6 +22,11 @@ const routes = [
     name: "dashboard",
     component: dashboard,
     children: [
+      {
+        path: "/firsthome",
+        name: "firsthome",
+        component: firsthome
+      },
       {
         path: "/home",
         name: "home",

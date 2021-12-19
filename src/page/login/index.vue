@@ -46,6 +46,7 @@ import cookie from "/@/utils/cookie";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { User, Lock } from "@element-plus/icons";
+
 const store = useStore();
 const router = useRouter();
 const ruleForm = ref(null);
@@ -65,8 +66,9 @@ const form = reactive({
 const handleLogin = () => {
   ruleForm.value.validate(async valid => {
     if (valid) {
+      
       store
-        .dispatch("setToken",{id:1})
+        .dispatch("setToken", { id: 1 })
         .then(res => {
           if (res) {
             router.push({ path: "/dashboard" });
