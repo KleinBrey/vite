@@ -46,6 +46,7 @@ import cookie from "/@/utils/cookie";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
 import { User, Lock } from "@element-plus/icons";
+
 const store = useStore();
 const router = useRouter();
 const ruleForm = ref(null);
@@ -65,6 +66,7 @@ const form = reactive({
 const handleLogin = () => {
   ruleForm.value.validate(async valid => {
     if (valid) {
+      
       store
         .dispatch("setToken", { id: 1 })
         .then(res => {
@@ -88,8 +90,8 @@ const handleEnterKey = e => {
 };
 onMounted(() => {
   document.addEventListener("keydown", handleEnterKey);
-  form.model.userName = cookie.getCookie().userName;
-  form.model.passWord = cookie.getCookie().passWord;
+  form.model.userName = cookie.getCookie()?.userName;
+  form.model.passWord = cookie.getCookie()?.passWord;
 });
 onUnmounted(() => {
   document.removeEventListener("keydown", handleEnterKey);

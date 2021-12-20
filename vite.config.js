@@ -6,7 +6,6 @@ import styleImport from "vite-plugin-style-import";
 export default defineConfig({
   plugins: [
     vue(),
-   
     styleImport({
       libs: [
         {
@@ -40,7 +39,8 @@ export default defineConfig({
     host: "0.0.0.0",
     proxy: {
       "/api": {
-        target: "https://mock.mengxuegu.com/mock/6188fda74c5d9932f7e75822/duonanjian/", // 后台接口
+        target:
+          "https://mock.mengxuegu.com/mock/6188fda74c5d9932f7e75822/duonanjian/", // 后台接口
         changeOrigin: true,
         secure: false, // 如果是https接口，需要配置这个参数
         // ws: true, //websocket支持
@@ -51,5 +51,5 @@ export default defineConfig({
   // 引入第三方的配置
   optimizeDeps: {
     include: ["element-plus"]
-  },
+  }
 });
