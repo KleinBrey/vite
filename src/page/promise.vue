@@ -1,58 +1,46 @@
 <template>
-  <div id="trafic-light">{{color}}</div>
+  <div id="trafic-light">{{ color }}</div>
 </template>
-<script setup>
+<script>
 import { ref, nextTick, onMounted } from "vue";
-const color = ref("5555");
-// 
-const trypromise = number => {
-  return new Promise((resolve, reject) => {
-    // settimeout 宏任务切开微任务
-    setTimeout(() => resolve((number += 1)), 1000);
-  });
-};
-const usedata = async () => {
-  // 1 
-  trypromise(5).then(res => (color.value = res));
-  // 2
-  try {
-    const data1 = await trypromise(1);
-    const data2 = await trypromise(data1);
-    const data3 = await trypromise(data2);
-    console.log(data1, data2, data3);
-  } catch (e) {
-    // 接受报错
-    console.log(e, "err");
+
+export default {
+  props: {
+
+  },
+  setup (props) {
+    const sleep = (delay) => {
+      return new Promise((resolve, reject) => {
+        setTimeout(delay === 2000 ? reject("到绿色了") : resolve, delay)
+      })
+    }
+    const usefunction = async (delay, color) => {
+      document.getElementById("trafic-light").style.background = color
+      try {
+        await sleep(delay)
+      }
+      catch (err) {
+        console.log(err)
+      }
+    }
+    const main = async () => {
+      while (true) {
+        await usefunction(4000, "red");
+        await usefunction(3000, "yellow");
+        await usefunction(2000, "green")
+      }
+    };
+    onMounted(() => {
+      main()
+    });
   }
-};
-usedata();
-// promise
-const sleep = delay => {
-  return new Promise((resolve, reject) => {
-    setTimeout(resolve, delay);
-  });
-};
-const use = async (delay, colo) => {
-  nextTick(() => {});
-  document.getElementById("trafic-light").style.background = colo;
-  color.value = colo;
-  await sleep(delay);
-};
-const main = async () => {
-  while (true) {
-    await use(3000, "red");
-    await use(1000, "yellow");
-    await use(2000, "green");
-  }
-};
-onMounted(() => {
-  main();
-});
+}
+
 </script>
 <style>
 #trafic-light {
-  width: 300px;
-  height: 300px;
+  width: 100px;
+  height: 100px;
   border-radius: 50%;
   text-align: center;
   line-height: 300px;
