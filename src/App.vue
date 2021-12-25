@@ -3,12 +3,6 @@
 </template>
 
 <script setup>
-import HelloWorld from "./page/home.vue";
-import { ref } from "vue";
-const rgrg = ref("etettetetet");
-const add = () => {
-  rgrg.value = "6777";
-};
 </script>
 
 <style>

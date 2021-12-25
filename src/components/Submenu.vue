@@ -3,6 +3,7 @@
   <div>
     <!-- 存在子菜单 -->
     <template v-if="item.children && item.children.length>0">
+      <!-- {{item.title}} -->
       <el-sub-menu :index="item.path">
         <template #title>
           <el-icon>
