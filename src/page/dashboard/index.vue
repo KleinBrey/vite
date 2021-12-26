@@ -49,7 +49,7 @@ const logout = () => {
   logOut({ fhfhfh: 1 }).then(res => {
     routers.push("/login");
     window.sessionStorage.clear();
-    store.commit(types.MENU_LIST, [])
+    store.commit(types.MENU_LIST, []);
   });
 };
 </script>

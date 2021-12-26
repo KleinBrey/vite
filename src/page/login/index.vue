@@ -66,7 +66,6 @@ const form = reactive({
 const handleLogin = () => {
   ruleForm.value.validate(async valid => {
     if (valid) {
-      
       store
         .dispatch("setToken", { id: 1 })
         .then(res => {
@@ -89,8 +88,6 @@ const handleEnterKey = e => {
   }
 };
 onMounted(() => {
-
-  
   document.addEventListener("keydown", handleEnterKey);
   form.model.userName = cookie.getCookie()?.userName;
   form.model.passWord = cookie.getCookie()?.passWord;
@@ -139,7 +136,7 @@ const { model, rules } = toRefs(form);
       }
       .secret {
         margin-top: 25px;
-        font-size: 20px;
+        font-size: var(--fdsize);
         display: inline-block;
         cursor: pointer;
       }
@@ -147,6 +144,7 @@ const { model, rules } = toRefs(form);
         position: absolute;
         right: 10px;
         bottom: 10px;
+        font-size: calc(var(--fbsize)*1px);
         font-family: "Franklin";
       }
     }

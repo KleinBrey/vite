@@ -42,6 +42,7 @@ import {
   ElLink,
   ElMain,
   ElMenu,
+  ElSubMenu,
   ElMenuItem,
   ElMenuItemGroup,
   ElOption,
@@ -80,7 +81,7 @@ import {
   ElLoading,
   ElMessage,
   ElMessageBox,
-  ElNotification,
+  ElNotification
 } from "element-plus";
 const componentlist = [
   ElAlert,
@@ -126,6 +127,7 @@ const componentlist = [
   ElLink,
   ElMain,
   ElMenu,
+  ElSubMenu,
   ElMenuItem,
   ElMenuItemGroup,
   ElOption,
@@ -164,7 +166,7 @@ const componentlist = [
   ElLoading,
   ElMessage,
   ElMessageBox,
-  ElNotification,
+  ElNotification
 ];
 const plugins = [ElLoading];
 // 中文支持
