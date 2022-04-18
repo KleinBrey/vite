@@ -69,6 +69,10 @@ const routes = [
       }
     ]
   },
+
+
+
+  
   {
     path: "/:catchAll(.*)",
     name: "404",
