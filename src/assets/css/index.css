@@ -1,0 +1,25 @@
+html,
+body {
+  height: 100%;
+  width: 100%;
+  border: hidden;
+  overflow: hidden;
+}
+:root {
+  --fdsize: 20px;
+  --fbsize: 18;
+}
+#app {
+  padding: 0px;
+  margin: 0px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  border: hidden;
+}
+@font-face {
+  font-family: "Franklin"; /*定义字体名*/
+  src: url(/@/assets/front/TheFrankline.ttf); /*字体包的引入路径*/
+}

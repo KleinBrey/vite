@@ -1,0 +1,32 @@
+{
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "test": "jest --watchAll",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "@element-plus/icons": "^0.0.11",
+    "axios": "^0.24.0",
+    "element-plus": "^1.2.0-beta.3",
+    "less": "^4.1.2",
+    "nprogress": "^0.2.0",
+    "unplugin-vue-components": "^0.17.2",
+    "vite": "^2.3.7",
+    "vue": "^3.2.0",
+    "vue-router": "^4.0.11",
+    "vuex": "^4.0.2",
+    "vxe-table": "^4.1.6",
+    "xe-utils": "^3.4.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.17.5",
+    "@babel/preset-env": "^7.16.11",
+    "@vitejs/plugin-vue": "^1.2.3",
+    "@vue/compiler-sfc": "^3.0.5",
+    "jest": "^27.5.1",
+    "sass": "^1.42.1",
+    "vite-plugin-style-import": "^1.0.1"
+  }
+}
