@@ -5,13 +5,13 @@ import storage from "/@/utils/storage";
 const pendingMap = new Map();
 const LoadingInstance = {
   _target: null,
-  _count: 0
+  _count: 0,
 };
 
 function myAxios(axiosConfig, customOptions, loadingOptions) {
   const service = axios.create({
     baseURL: "/api", // 设置统一的请求前缀
-    timeout: 10000 // 设置统一的超时时长
+    timeout: 10000, // 设置统一的超时时长
   });
 
   // 自定义配置
@@ -21,14 +21,14 @@ function myAxios(axiosConfig, customOptions, loadingOptions) {
       loading: false, // 是否开启loading层效果, 默认为false
       reduct_data_format: true, // 是否开启简洁的数据结构响应, 默认为true
       error_message_show: true, // 是否开启接口错误信息展示,默认为true
-      code_message_show: false // 是否开启code不为0时的信息提示, 默认为false
+      code_message_show: false, // 是否开启code不为0时的信息提示, 默认为false
     },
     customOptions
   );
 
   // 请求拦截
   service.interceptors.request.use(
-    config => {
+    (config) => {
       removePending(config);
       custom_options.repeat_request_cancel && addPending(config);
       // 创建loading实例
@@ -46,14 +46,14 @@ function myAxios(axiosConfig, customOptions, loadingOptions) {
       }
       return config;
     },
-    error => {
+    (error) => {
       return Promise.reject(error);
     }
   );
 
   // 响应拦截
   service.interceptors.response.use(
-    response => {
+    (response) => {
       removePending(response.config);
       custom_options.loading && closeLoading(custom_options); // 关闭loading
       if (
@@ -61,19 +61,21 @@ function myAxios(axiosConfig, customOptions, loadingOptions) {
         response.data &&
         response.data.code !== 0
       ) {
-        ElMessage({
-          type: "error",
-          message: response.data.message
-        });
+        // ElMessage({
+        //   showClose: true,
+        //   message: response.data.message,
+        //   type: "error",
+        // });
         return Promise.reject(response.data); // code不等于0, 页面具体逻辑就不执行了
       }
-      ElMessage({
-        type: "success",
-        message: `${response.config.url}接口调用成功！`
-      });
+      // ElMessage({
+      //   showClose: true,
+      //   type: "success",
+      //   message: `${response.config.url}接口调用成功！`,
+      // });
       return custom_options.reduct_data_format ? response.data : response;
     },
-    error => {
+    (error) => {
       error.config && removePending(error.config);
       custom_options.loading && closeLoading(custom_options); // 关闭loading
       custom_options.error_message_show && httpErrorStatusHandle(error); // 处理错误状态码
@@ -89,13 +91,13 @@ export default function request(method, url, data, lodding = true) {
       {
         url: url,
         method: method,
-        params: data
+        params: data,
       },
       {
-        loading: lodding
+        loading: lodding,
       },
       {
-        text: "获取列表数据...."
+        text: "获取列表数据....",
       }
     );
   } else {
@@ -103,13 +105,13 @@ export default function request(method, url, data, lodding = true) {
       {
         url: url,
         method: method,
-        data
+        data,
       },
       {
-        loading: lodding
+        loading: lodding,
       },
       {
-        text: "获取列表数据...."
+        text: "获取列表数据....",
       }
     );
   }
@@ -176,7 +178,7 @@ function httpErrorStatusHandle(error) {
 
   ElMessage({
     type: "error",
-    message
+    message,
   });
 }
 
@@ -219,7 +221,7 @@ function addPending(config) {
   const pendingKey = getPendingKey(config);
   config.cancelToken =
     config.cancelToken ||
-    new axios.CancelToken(cancel => {
+    new axios.CancelToken((cancel) => {
       if (!pendingMap.has(pendingKey)) {
         pendingMap.set(pendingKey, cancel);
       }

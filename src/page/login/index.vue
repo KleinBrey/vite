@@ -1,12 +1,16 @@
 <template>
   <div class="login">
-    <el-icon style="vertical-align: middle;">
+    <el-icon style="vertical-align: middle">
       <search />
     </el-icon>
     <div class="logincontent">
       <el-form :model="model" :rules="rules" ref="ruleForm" class="rule-form">
         <el-form-item prop="userName">
-          <el-input clearable v-model="model.userName" placeholder="请输入用户名">
+          <el-input
+            clearable
+            v-model="model.userName"
+            placeholder="请输入用户名"
+          >
             <template #prefix>
               <el-icon class="el-input__icon">
                 <user />
@@ -40,15 +44,30 @@
             </el-input>
           </el-col>
           <el-col :span="12">
-            <img ref="captcha" @click="toggleVerify" src="http://localhost:3000/code" alt />
+            <div>
+              <img
+                ref="captcha"
+                @click="toggleVerify"
+                src="http://localhost:3000/code"
+                alt
+              />
+            </div>
           </el-col>
         </el-form-item>
 
-        <el-form-item>
-          <el-button :type=" ifregiste ? '' : 'primary' " @click.prevent="handleLogin">登录</el-button>
-          <el-button :type=" ifregiste ? 'primary' : ''" @click="resetForm">注册</el-button>
+        <el-form-item style="justify-content: center">
+          <el-button
+            :type="ifregiste ? '' : 'primary'"
+            @click.prevent="handleLogin"
+            >登录</el-button
+          >
+          <el-button :type="ifregiste ? 'primary' : ''" @click="resetForm"
+            >注册</el-button
+          >
         </el-form-item>
-        <span title="测试用户 直接登录" class="secret" @click="noSecret">免密登录</span>
+        <span title="测试用户 直接登录" class="secret" @click="noSecret"
+          >免密登录</span
+        >
         <span class="tag">THRASHER</span>
       </el-form>
     </div>
@@ -72,33 +91,33 @@ const form = reactive({
   model: {
     userName: "",
     passWord: "",
-    verify: ""
+    verify: "",
   },
   ifregiste: false,
   rules: {
     userName: [{ required: true, message: "请输入用户名", trigger: "blur" }],
     passWord: [
       { required: true, message: "请输入密码", trigger: "blur" },
-      { min: 2, message: "密码长度必须不小于2位", trigger: "blur" }
+      { min: 2, message: "密码长度必须不小于2位", trigger: "blur" },
     ],
-    verify: [{ required: true, message: "请输入验证码", trigger: "blur" }]
-  }
+    verify: [{ required: true, message: "请输入验证码", trigger: "blur" }],
+  },
 });
 const handleLogin = () => {
   if (form.ifregiste) {
     form.ifregiste = false;
     return;
   }
-  ruleForm.value.validate(async valid => {
+  ruleForm.value.validate(async (valid) => {
     if (valid) {
       store
         .dispatch("setToken", form.model)
-        .then(res => {
+        .then((res) => {
           if (res) {
             router.push({ path: "/dashboard" });
           }
         })
-        .catch(res => console.log(res));
+        .catch((res) => console.log(res));
       cookie.setCookie(form.model.userName, form.model.passWord, 5);
     }
   });
@@ -108,15 +127,15 @@ const resetForm = () => {
     form.ifregiste = true;
     return;
   }
-  ruleForm.value.validate(async valid => {
+  ruleForm.value.validate(async (valid) => {
     if (valid) {
       const data = await register(form.model);
       if ((data.code = 200)) {
         ElMessage({
           type: "success",
-          message: data.message
+          message: data.message,
         });
-        form.ifregiste = false
+        form.ifregiste = false;
       }
     }
   });
@@ -126,7 +145,7 @@ const toggleVerify = () => {
   captcha.value.src = "http://localhost:3000/code?time=" + Date.now();
 };
 // 回车登录
-const handleEnterKey = e => {
+const handleEnterKey = (e) => {
   if (e.keyCode === 13) {
     handleLogin();
   }

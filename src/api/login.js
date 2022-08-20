@@ -12,3 +12,12 @@ export const getMenulist = params => {
 export const logOut = params => {
   return request("post", `logout`, params, false);
 };
+export const getUser = params => {
+  return request("get", `getUser`, params, false);
+};
+export const setUser = params => {
+  return request("post", `setUser`, params, false);
+};
+export const updataUser = params => {
+  return request("patch", `updataUser`, params, false);
+};

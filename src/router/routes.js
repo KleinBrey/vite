@@ -10,6 +10,7 @@ const vueFunction = () => import("/@/page/vueFunction/index.vue");
 const buttoneffect = () => import("/@/page/vueFunction/buttoneffect/index.vue");
 const jsfundamental = () => import("/@/page/jsfundamental/index.vue");
 const prototype = () => import("/@/page/jsfundamental/prototype.vue");
+const userinfo = () => import("/@/page/userinfo/index.vue");
 const routes = [
   { path: "/", redirect: "/login" },
   {
@@ -31,6 +32,11 @@ const routes = [
         path: "/home",
         name: "home",
         component: home
+      },
+      {
+        path: "/userinfo",
+        name: "userinfo",
+        component: userinfo
       },
       {
         path: "/jsfundamental",
