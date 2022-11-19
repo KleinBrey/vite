@@ -1,15 +1,24 @@
 <template>
   <el-container>
-    <el-aside>
-      <el-menu @select="menuSelect" unique-opened="true">
-        <Submenu v-for="(item,index) in menulist" :itemcontent="item" :key="index" />
+    <el-header style="text-align: right; font-size: 12px">
+      <el-menu
+        :default-active="defaultActiveMenu"
+        class="el-menu-demo"
+        mode="horizontal"
+        background-color="#545c64"
+        text-color="#fff"
+        active-text-color="#ffd04b"
+        @select="menuSelect"
+      >
+        <MenuContent
+          v-for="(item, index) in menulist"
+          :itemcontent="item"
+          :key="index"
+        />
       </el-menu>
-    </el-aside>
-
-    <el-container>
-      <el-header style="text-align: right; font-size: 12px">
+      <div class="right-user">
         <el-dropdown>
-          <el-icon style="margin-right: 15px">
+          <el-icon class="icon">
             <setting />
           </el-icon>
           <template #dropdown>
@@ -19,20 +28,23 @@
             </el-dropdown-menu>
           </template>
         </el-dropdown>
-        <span>管理员</span>
-      </el-header>
-      <el-main>
-        <router-view></router-view>
-      </el-main>
-      <el-footer>底部</el-footer>
-    </el-container>
+        <span class="name">管理员</span>
+      </div>
+    </el-header>
+    <el-main>
+      <router-view></router-view>
+    </el-main>
+    <el-footer>
+      <div>
+        @Copyright Klein's Blog
+      </div>
+    </el-footer>
   </el-container>
 </template>
-
 <script setup>
 import { ref, computed } from "vue";
 import { logOut } from "/@/api/login";
-import Submenu from "../../components/Submenu.vue";
+import MenuContent from "../../components/MenuContent.vue";
 import { Message, Menu, Setting } from "@element-plus/icons";
 import { useStore } from "vuex";
 import { useRouter } from "vue-router";
@@ -41,12 +53,12 @@ import * as types from "../../store/mutation-types";
 const store = useStore();
 const routers = useRouter();
 const menulist = computed(() => store.state.menulist);
-
-const menuSelect = e => {
+const defaultActiveMenu = ref(menulist.value[0].path);
+const menuSelect = (e) => {
   routers.push(e);
 };
 const logout = () => {
-  logOut({ fhfhfh: 1 }).then(res => {
+  logOut({ fhfhfh: 1 }).then((res) => {
     routers.push("/login");
     window.sessionStorage.clear();
     store.commit(types.MENU_LIST, []);
@@ -63,31 +75,29 @@ const logout = () => {
   background-color: #b3c0d1;
   color: var(--el-text-color-primary);
   line-height: 60px;
-}
-
-.el-aside {
-  width: 220px;
-  overflow-x: hidden;
-  background-color: #1b2a47;
-  .el-menu {
-    background-color: #1b2a47;
-    color: white;
-
-    .el-sub-menu__title {
+  .right-user {
+    display: flex;
+    position: absolute;
+    top: 0;
+    right: 50px;
+    justify-content: center;
+    align-items: center;
+    .icon {
       color: white;
-      &:hover {
-        background-color: #2a395b;
-      }
+      margin-right: 10px;
     }
-    .el-menu-item-group__title {
-      color: white;
-    }
-    .el-menu-item {
-      color: white;
-      &:hover {
-        background-color: #2a395b;
-      }
+    .name {
+      color: rgb(210, 201, 39);
     }
   }
+}
+.el-main {
+  padding: 0 150px;
+  background-color: antiquewhite;
+}
+.el-footer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>

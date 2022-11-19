@@ -1,10 +1,12 @@
 <template>
-  <el-button type="primary" @click="add">
-    新增
-    <el-icon class="el-input__icon">
-      <plus />
-    </el-icon>
-  </el-button>
+  <div class="add-button">
+    <el-button type="primary" @click="add">
+      新增
+      <el-icon class="el-input__icon">
+        <plus />
+      </el-icon>
+    </el-button>
+  </div>
   <el-table :data="tableData" style="width: 100%">
     <el-table-column prop="name" label="名称" align="center" width="120" />
     <el-table-column prop="age" label="年龄" align="center" width="120" />
@@ -74,7 +76,7 @@ const add = () => {
 const edit = (val) => {
   dialogVisible.value = true;
   editMode.value = "edit";
-  editID.value = val._id
+  editID.value = val._id;
   console.log("click", editID.value);
   ruleForm.address = val.address;
   ruleForm.age = val.age;
@@ -156,3 +158,10 @@ const rules = reactive({
 
 const { tableData } = { ...toRefs(useData) };
 </script>
+
+<style lang="less" scoped>
+.add-button {
+  padding: 10px;
+  float: left;
+}
+</style>
